@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boxing Random</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+        }
+        iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="https://images-opensocial.googleusercontent.com/gadgets/ifr?url=https://119024126-764632107590020602.preview.editmysite.com/uploads/b/8156145-406603557540603200/files/boxrand.xml&container=ig"></iframe>
+    <script>
+        // Additional JavaScript to block ads
+        document.querySelectorAll('iframe').forEach(iframe => {
+            iframe.onload = () => {
+                // Example: Block ads from a specific domain
+                if (iframe.src.includes('ads.example.com')) {
+                    iframe.style.display = 'none';
+                }
+            };
+        });
+    </script>
+</body>
+</html>
