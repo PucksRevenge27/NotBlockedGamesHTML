@@ -11,6 +11,7 @@
             margin: 0;
             background-color: #f0f0f0;
             font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Prevent scrolling */
         }
 
         button {
@@ -28,6 +29,7 @@
             outline: none;
             position: relative;
             overflow: hidden;
+            margin: 10px;
         }
 
         button:hover {
@@ -68,6 +70,12 @@
             display: block;
             text-align: center;
         }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -104,8 +112,80 @@
                 <head>
                     <title>NotBlocked In only HTML<\/title>
                     <style>
-                        body { background-color: lightblue; }
-                        h1 { color: navy; }
+                        body {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            height: 100vh;
+                            margin: 0;
+                            background-color: lightblue;
+                            font-family: 'Arial', sans-serif;
+                            overflow: hidden; /* Prevent scrolling */
+                        }
+
+                        button {
+                            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+                            border: none;
+                            border-radius: 50px;
+                            padding: 20px 40px;
+                            font-size: 20px;
+                            color: white;
+                            text-transform: uppercase;
+                            letter-spacing: 2px;
+                            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+                            transition: all 0.3s ease;
+                            cursor: pointer;
+                            outline: none;
+                            margin: 10px;
+                            position: relative;
+                            overflow: hidden;
+                        }
+
+                        button:hover {
+                            background: linear-gradient(135deg, #ff6f61, #ffcc5c);
+                            transform: translateY(-5px);
+                            box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+                        }
+
+                        button:active {
+                            transform: translateY(1px);
+                            box-shadow: 0 5px 10px rgba(0,0,0,0.22);
+                        }
+
+                        button::before {
+                            content: '';
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 50px;
+                            background: rgba(255, 255, 255, 0.2);
+                            z-index: -1;
+                            transition: transform 0.3s ease;
+                        }
+
+                        button:hover::before {
+                            transform: scale(1.1);
+                        }
+
+                        button:active::before {
+                            transform: scale(1.05);
+                        }
+
+                        button span {
+                            position: relative;
+                            z-index: 1;
+                            display: block;
+                            text-align: center;
+                        }
+
+                        .button-container {
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: center;
+                        }
                     <\/style>
                     <script src="//cdn.jsdelivr.net/npm/eruda"><\/script>
                     <script>
@@ -122,11 +202,85 @@
                                 }
                             }
                         });
+
+                        function openGame(url) {
+                            fetch(url)
+                                .then(response => response.text())
+                                .then(data => {
+                                    var gameWindow = window.open('about:blank', '_blank', 'width=800,height=600');
+                                    gameWindow.document.open();
+                                    gameWindow.document.write(data);
+                                    gameWindow.document.close();
+
+                                    // Add Eruda script and toggle functionality to the game window
+                                    var script = gameWindow.document.createElement('script');
+                                    script.src = "//cdn.jsdelivr.net/npm/eruda";
+                                    gameWindow.document.body.appendChild(script);
+                                    script.onload = function() {
+                                        gameWindow.addEventListener('keydown', function(event) {
+                                            if (event.ctrlKey && event.shiftKey && event.key === 'I') {
+                                                if (!gameWindow.erudaInitialized) {
+                                                    gameWindow.eruda.init();
+                                                    gameWindow.eruda.position({ x: gameWindow.innerWidth - 20, y: gameWindow.innerHeight - 20 });
+                                                    gameWindow.erudaInitialized = true;
+                                                } else {
+                                                    gameWindow.eruda.destroy();
+                                                    gameWindow.erudaInitialized = false;
+                                                }
+                                            }
+                                        });
+                                    };
+                                })
+                                .catch(error => console.error('Error fetching the game:', error));
+                        }
                     <\/script>
-                <\/head>
+                </head>
                 <body>
-                    <h1>Welcome to the iFrame<\/h1>
-                    <p>This is some text in the iFrame.<\/p>
+                    <h1>Choose a Game<\/h1>
+                    <div class="button-container">
+                        <button onclick="openGame('https://raw.githubusercontent.com/PucksRevenge27/NotBlockedGamesHTML/main/1v1lol.html')">
+                            <span>Play 1v1.lol<\/span>
+                        <\/button>
+                        <button onclick="openGame('https://raw.githubusercontent.com/PucksRevenge27/NotBlockedGamesHTML/main/Basket%20Random.html')">
+                            <span>Play Basket Random<\/span>
+                        <\/button>
+                        <button onclick="openGame('https://raw.githubusercontent.com/PucksRevenge27/NotBlockedGamesHTML/main/CookieClicker.html')">
+                            <span>Play Cookie Clicker<\/span>
+                        <\/button>
+                        <button onclick="openGame('https://raw.githubusercontent.com/PucksRevenge27/NotBlockedGamesHTML/main/Boxing%20Random.html')">
+                            <span>Play Boxing Random<\/span>
+                        <\/button>
+                        <button onclick="openGame('https://raw.githubusercontent.com/PucksRevenge27/NotBlockedGamesHTML/main/EaglercraftX%20Offline%201.9.html')">
+                            <span>Play EaglercraftX Offline 1.9<\/span>
+                        <\/button>
+                        <button onclick="openGame('https://raw.githubusercontent.com/PucksRevenge27/NotBlockedGamesHTML/main/MotoX3M2.html')">
+                            <span>Play Moto X3M 2<\/span>
+                        <\/button>
+                        <button onclick="openGame('https://raw.githubusercontent.com/PucksRevenge27/NotBlockedGamesHTML/main/Poly%20Track.html')">
+                            <span>Play Poly Track<\/span>
+                        <\/button>
+                        <button onclick="openGame('https://raw.githubusercontent.com/PucksRevenge27/NotBlockedGamesHTML/main/Retrobowl.html')">
+                            <span>Play Retro Bowl<\/span>
+                        <\/button>
+                        <button onclick="openGame('https://raw.githubusercontent.com/PucksRevenge27/NotBlockedGamesHTML/main/Slope.html')">
+                            <span>Play Slope<\/span>
+                        <\/button>
+                        <button onclick="openGame('https://raw.githubusercontent.com/PucksRevenge27/NotBlockedGamesHTML/main/Soccer%20Random.html')">
+                            <span>Play Soccer Random<\/span>
+                        <\/button>
+                        <button onclick="openGame('https://raw.githubusercontent.com/PucksRevenge27/NotBlockedGamesHTML/main/Survival%20Race.html')">
+                            <span>Play Survival Race<\/span>
+                        <\/button>
+                        <button onclick="openGame('https://raw.githubusercontent.com/PucksRevenge27/NotBlockedGamesHTML/main/Tank%20Trouble%202.html')">
+                            <span>Play Tank Trouble 2<\/span>
+                        <\/button>
+                        <button onclick="openGame('https://raw.githubusercontent.com/PucksRevenge27/NotBlockedGamesHTML/main/Tomb%20of%20the%20mask.html')">
+                            <span>Play Tomb of the Mask<\/span>
+                        <\/button>
+                        <button onclick="openGame('https://raw.githubusercontent.com/PucksRevenge27/NotBlockedGamesHTML/main/paperio2.html')">
+                            <span>Play Paper.io 2<\/span>
+                        <\/button>
+                    <\/div>
                 <\/body>
                 <\/html>
             `;
@@ -136,6 +290,24 @@
             popup.document.write(content);
             popup.document.close();
         }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.shiftKey && event.key === 'I') {
+                if (!erudaInitialized) {
+                    var script = document.createElement('script');
+                    script.src = "//cdn.jsdelivr.net/npm/eruda";
+                    document.body.appendChild(script);
+                    script.onload = function() {
+                        eruda.init();
+                        eruda.position({ x: window.innerWidth - 20, y: window.innerHeight - 20 });
+                        erudaInitialized = true;
+                    };
+                } else {
+                    eruda.destroy();
+                    erudaInitialized = false;
+                }
+            }
+        });
     </script>
 </body>
 </html>
