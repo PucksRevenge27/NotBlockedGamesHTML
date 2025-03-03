@@ -3,26 +3,36 @@
 <head>
     <title>NOTBLOCKED GAMES</title>
     <style>
-        body {
+        /* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background: linear-gradient(135deg, #f0f0f0, #d3d3d3);
+    background: linear-gradient(135deg, #e0eafc, #cfdef3);
     font-family: 'Arial', sans-serif;
     overflow: hidden; /* Prevent scrolling */
 }
 
+/* Heading Styling */
 h1 {
     font-size: 3em;
-    color: #333;
+    color: #222;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 
+/* Button Styling */
 button {
-    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
     border: none;
     border-radius: 50px;
     padding: 20px 40px;
@@ -40,7 +50,7 @@ button {
 }
 
 button:hover {
-    background: linear-gradient(135deg, #ff6f61, #ffcc5c);
+    background: linear-gradient(135deg, #5a0fc8, #1a6afc);
     transform: translateY(-5px);
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
@@ -78,6 +88,7 @@ button span {
     text-align: center;
 }
 
+/* Button Container Styling */
 .button-container {
     display: flex;
     flex-wrap: wrap;
@@ -85,6 +96,7 @@ button span {
     gap: 20px;
 }
 
+/* Card Styling */
 .card {
     background: white;
     border-radius: 10px;
@@ -111,12 +123,280 @@ button span {
 .card-title {
     font-size: 1.5em;
     margin: 0;
-    color: #333;
+    color: #222;
 }
 
 .card-description {
-    color: #777;
+    color: #555;
     font-size: 1em;
+}
+
+/* Additional Styling */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header {
+    padding: 20px 0;
+    background: #333;
+    color: white;
+    border-bottom: 5px solid #444;
+}
+
+.header h1 {
+    margin-bottom: 10px;
+    font-size: 2.5em;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #ddd;
+}
+
+.main {
+    padding: 40px 0;
+}
+
+.footer {
+    padding: 20px 0;
+    background: #333;
+    color: white;
+    border-top: 5px solid #444;
+    text-align: center;
+}
+
+.footer p {
+    margin: 10px 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.grid-item {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.grid-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.grid-item h2 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.grid-item p {
+    color: #555;
+}
+
+@media (max-width: 600px) {
+    body {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .header, .footer {
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animation */
+@keyframes slideIn {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animated {
+    animation: slideIn 0.5s ease-out;
+}
+
+/* Typography */
+h2 {
+    font-size: 2em;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1em;
+    color: #666;
+    line-height: 1.6;
+}
+
+a {
+    color: #2575fc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #1a6afc;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    padding: 5px 0;
+}
+
+blockquote {
+    margin: 20px 0;
+    padding: 10px 20px;
+    background: #f4f4f4;
+    border-left: 5px solid #2575fc;
+    font-style: italic;
+    color: #555;
+}
+
+/* Form Styling */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form input[type="submit"], form button {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+form input[type="submit"]:hover, form button:hover {
+    background: linear-gradient(135deg, #5a0fc8, #1a6afc);
+}
+
+form input[type="submit"]:active, form button:active {
+    transform: translateY(1px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.22);
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background: #2575fc;
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background: #f4f4f4;
+}
+
+/* Progress Bar Styling */
+.progress-bar {
+    width: 100%;
+    background: #f4f4f4;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar-inner {
+    height: 20px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    line-height: 20px;
+    transition: width 0.3s ease;
+}
+
+/* Tooltip Styling */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 5px;
+
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position above the element */
+    left: 50%;
+    margin-left: -60px;
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
 }
     </style>
 </head>
