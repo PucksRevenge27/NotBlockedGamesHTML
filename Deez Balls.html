@@ -12,17 +12,73 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <style>
-        body {background-color: #c8c8c8;overflow: hidden;padding: 0;margin: 0;font-family: Lato;}.center-box {text-align: center;position: absolute;width: 300px;height: 400px;margin: -200px 0 0 -150px;left: 50%;top: 50%;}.title {font-size: 50px;}.button {position: absolute;width: 150px;height: 150px;left: 42%;top: 50%;margin: -100px 0 0 -50px;border: 2px solid #666;color: black;-moz-border-radius: 15px;-webkit-border-radius: 15px;border-radius: 15px;font-size: 4rem !important;}.button .text {font-size: 10px;padding: 0 10px;}.op {position: absolute;width: 200px;height: 100px;left: 50%;top: 100%;margin: -50px 0 0 -100px;color: black;}
+        body {
+            background-color: #c8c8c8;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            font-family: Lato;
+        }
+
+        canvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .center-box {
+            text-align: center;
+            position: absolute;
+            width: 300px;
+            height: 400px;
+            margin: -200px 0 0 -150px;
+            left: 50%;
+            top: 50%;
+        }
+
+        .title {
+            font-size: 50px;
+        }
+
+        .button {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            left: 42%;
+            top: 50%;
+            margin: -100px 0 0 -50px;
+            border: 2px solid #666;
+            color: black;
+            -moz-border-radius: 15px;
+            -webkit-border-radius: 15px;
+            border-radius: 15px;
+            font-size: 4rem !important;
+        }
+
+        .button .text {
+            font-size: 10px;
+            padding: 0 10px;
+        }
+
+        .op {
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            left: 50%;
+            top: 100%;
+            margin: -50px 0 0 -100px;
+            color: black;
+        }
     </style>
 </head>
 
 <body>
 
-    <canvas style="display:none;" id="stage"></canvas>
+    <canvas id="stage"></canvas>
 
     <div id="begin">
         <section class="center-box">
-            <span class="title">Deez Balls</span>
+            <span class="title">Insert Title here</span>
             <div class="button">
                 <div id="txtAr"></div>
                 <div class="text" style="font-size:2.5rem"></div>
