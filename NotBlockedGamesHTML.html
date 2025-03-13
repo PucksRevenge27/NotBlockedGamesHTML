@@ -410,7 +410,7 @@ table tr:nth-child(even) {
 
         function openPopup() {
             // Create a new window
-            var popup = window.open('', 'popup', 'width=1920,height=1080');
+            var popup = window.open('', 'popup', 'width=1300,height=731');
 
             // Attempt to open the window in fullscreen
             popup.onload = function() {
@@ -531,7 +531,7 @@ table tr:nth-child(even) {
                             fetch(url)
                                 .then(response => response.text())
                                 .then(data => {
-                                    var gameWindow = window.open('about:blank', '_blank', 'width=1920,height=1080');
+                                    var gameWindow = window.open('about:blank', '_blank', 'width=1300,height=731');
                                     gameWindow.document.open();
                                     gameWindow.document.write(data);
                                     gameWindow.document.close();
