@@ -409,26 +409,28 @@ table tr:nth-child(even) {
         let erudaInitialized = false;
 
         function openPopup() {
-    // Create a new window
-    var popup = window.open('', 'popup', 'width=1920,height=1080');
+            // Create a new window
+            var popup = window.open('', 'popup', 'width=1920,height=1080');
 
-    // Attempt to open the window in fullscreen
-    if (popup.document.fullscreenEnabled) {
-        popup.document.documentElement.requestFullscreen();
-    } else if (popup.document.webkitFullscreenEnabled) {
-        popup.document.documentElement.webkitRequestFullscreen();
-    } else if (popup.document.mozFullScreenEnabled) {
-        popup.document.documentElement.mozRequestFullScreen();
-    } else if (popup.document.msFullscreenEnabled) {
-        popup.document.documentElement.msRequestFullscreen();
-    } else {
-        // Fallback to maximize the window
-        popup.moveTo(0, 0);
-        popup.resizeTo(screen.width, screen.height);
-    }
+            // Attempt to open the window in fullscreen
+            popup.onload = function() {
+                if (popup.document.fullscreenEnabled) {
+                    popup.document.documentElement.requestFullscreen();
+                } else if (popup.document.webkitFullscreenEnabled) {
+                    popup.document.documentElement.webkitRequestFullscreen();
+                } else if (popup.document.mozFullScreenEnabled) {
+                    popup.document.documentElement.mozRequestFullScreen();
+                } else if (popup.document.msFullscreenEnabled) {
+                    popup.document.documentElement.msRequestFullscreen();
+                } else {
+                    // Fallback to maximize the window
+                    popup.moveTo(0, 0);
+                    popup.resizeTo(screen.width, screen.height);
+                }
+            };
 
-    // Define the HTML content with embedded CSS and script
-    var content = `
+            // Define the HTML content with embedded CSS and script
+            var content = `
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -529,7 +531,7 @@ table tr:nth-child(even) {
                             fetch(url)
                                 .then(response => response.text())
                                 .then(data => {
-                                    var gameWindow = window.open('about:blank', '_blank', 'width=800,height=600');
+                                    var gameWindow = window.open('about:blank', '_blank', 'width=1920,height=1080');
                                     gameWindow.document.open();
                                     gameWindow.document.write(data);
                                     gameWindow.document.close();
