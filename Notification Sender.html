@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification Sender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #notification-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            z-index: 1000;
+        }
+
+        .notification {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            animation: slide-in 0.5s ease-out;
+        }
+
+        .notification img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .notification-content {
+            flex-grow: 1;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        @keyframes slide-in {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .customizer {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .customizer input, .customizer button {
+            margin: 10px 0;
+        }
+
+        .customizer button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="customizer">
+        <h2>Notification Customizer</h2>
+        <label for="notification-title">Title:</label><br>
+        <input type="text" id="notification-title" placeholder="Enter title"><br>
+        <label for="notification-message">Message:</label><br>
+        <input type="text" id="notification-message" placeholder="Enter message"><br>
+        <label for="notification-image">Image URL:</label><br>
+        <input type="text" id="notification-image" placeholder="Enter image URL"><br>
+        <button id="send-notification">Send Notification</button>
+    </div>
+    <div id="notification-container"></div>
+
+    <script>
+        document.getElementById('send-notification').addEventListener('click', () => {
+            const title = document.getElementById('notification-title').value;
+            const message = document.getElementById('notification-message').value;
+            const imageUrl = document.getElementById('notification-image').value;
+
+            sendNotification(title, message, imageUrl);
+            sendDesktopNotification(title, message, imageUrl);
+        });
+
+        function sendNotification(title, message, imageUrl) {
+            const notificationContainer = document.getElementById('notification-container');
+            
+            const notification = document.createElement('div');
+            notification.classList.add('notification');
+            
+            const notificationImage = document.createElement('img');
+            notificationImage.src = imageUrl;
+            
+            const notificationContent = document.createElement('div');
+            notificationContent.classList.add('notification-content');
+            
+            const notificationTitle = document.createElement('strong');
+            notificationTitle.textContent = title;
+            
+            const notificationMessage = document.createElement('p');
+            notificationMessage.textContent = message;
+            
+            const closeButton = document.createElement('button');
+            closeButton.classList.add('notification-close');
+            closeButton.innerHTML = '&times;';
+            closeButton.addEventListener('click', () => {
+                notificationContainer.removeChild(notification);
+            });
+            
+            notificationContent.appendChild(notificationTitle);
+            notificationContent.appendChild(notificationMessage);
+            notification.appendChild(notificationImage);
+            notification.appendChild(notificationContent);
+            notification.appendChild(closeButton);
+            notificationContainer.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notificationContainer.contains(notification)) {
+                    notificationContainer.removeChild(notification);
+                }
+            }, 5000); // Auto-remove after 5 seconds
+        }
+
+        function sendDesktopNotification(title, message, imageUrl) {
+            // Check if the browser supports notifications
+            if (!("Notification" in window)) {
+                alert("This browser does not support desktop notifications.");
+            } else if (Notification.permission === "granted") {
+                // If permission is already granted, create a notification
+                new Notification(title, {
+                    body: message,
+                    icon: imageUrl
+                });
+            } else if (Notification.permission !== "denied") {
+                // Otherwise, ask for permission
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        new Notification(title, {
+                            body: message,
+                            icon: imageUrl
+                        });
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
