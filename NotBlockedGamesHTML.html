@@ -409,26 +409,26 @@ table tr:nth-child(even) {
         let erudaInitialized = false;
 
         function openPopup() {
-            // Create a new window
-            var popup = window.open('', 'popup', 'width=600,height=400');
+    // Create a new window
+    var popup = window.open('', 'popup', 'width=600,height=400');
 
-            // Attempt to open the window in fullscreen
-            if (popup.fullscreen) {
-                popup.fullscreen();
-            } else if (popup.mozRequestFullScreen) {
-                popup.mozRequestFullScreen();
-            } else if (popup.webkitRequestFullscreen) {
-                popup.webkitRequestFullscreen();
-            } else if (popup.msRequestFullscreen) {
-                popup.msRequestFullscreen();
-            } else {
-                // Fallback to maximize the window
-                popup.moveTo(0, 0);
-                popup.resizeTo(screen.width, screen.height);
-            }
+    // Attempt to open the window in fullscreen
+    if (popup.document.fullscreenEnabled) {
+        popup.document.documentElement.requestFullscreen();
+    } else if (popup.document.webkitFullscreenEnabled) {
+        popup.document.documentElement.webkitRequestFullscreen();
+    } else if (popup.document.mozFullScreenEnabled) {
+        popup.document.documentElement.mozRequestFullScreen();
+    } else if (popup.document.msFullscreenEnabled) {
+        popup.document.documentElement.msRequestFullscreen();
+    } else {
+        // Fallback to maximize the window
+        popup.moveTo(0, 0);
+        popup.resizeTo(screen.width, screen.height);
+    }
 
-            // Define the HTML content with embedded CSS and script
-            var content = `
+    // Define the HTML content with embedded CSS and script
+    var content = `
                 <!DOCTYPE html>
                 <html>
                 <head>
